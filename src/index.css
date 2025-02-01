@@ -140,7 +140,7 @@
     }
 
     & .content .year {
-      @apply text-gray-100 font-medium text-base;
+      @apply text-gray-100 font-medium text-base italic;
     }
   }
 }
