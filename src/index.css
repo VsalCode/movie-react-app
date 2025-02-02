@@ -1,6 +1,4 @@
 @import "tailwindcss";
-
-
 @import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap");
 
@@ -92,7 +90,7 @@
     }
 
     & input {
-      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden italic;
+      @apply w-full bg-transparent py-2 sm:pr-10 pl-10 text-base text-gray-200 placeholder-light-200 outline-hidden;
     }
   }
 
@@ -140,7 +138,7 @@
     }
 
     & .content .year {
-      @apply text-gray-100 font-medium text-base italic;
+      @apply text-gray-100 font-medium text-base;
     }
   }
 }
