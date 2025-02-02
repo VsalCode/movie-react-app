@@ -3,6 +3,9 @@ import Search from "./components/search.jsx";
 import { useEffect, useState } from "react";
 import spinner from "./components/spinner.jsx";
 import Card from "./components/card.jsx";
+import { useDebounce } from "react-use";
+import { updateSearchCount } from "./appwrite.js";
+
 
 // API call
 const API_BASE_URL = "https://api.themoviedb.org/3";
@@ -22,6 +25,9 @@ const App = () => {
   const [errorMassage, setErrorMassage] = useState("");
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState("");
+
+  useDebounce( () => { setDebouncedSearchTerm(searchTerm); }, 600, [searchTerm]);
 
   // Fetch movies
   const fetchMovies = async (query = '') => {
@@ -47,6 +53,8 @@ const App = () => {
       }
 
       setMovies(data.results || []);
+
+      updateSearchCount();
     } catch (error) {
       console.error(`Error: ${error}`);
       setErrorMassage("Something went wrong while fetching the movies data");
@@ -57,9 +65,8 @@ const App = () => {
 
   // API call
   useEffect(() => {
-    console.log("API Key:", API_KEY); // Cek API key
-    fetchMovies(searchTerm);
-  }, [searchTerm]);
+    fetchMovies(debouncedSearchTerm);
+  }, [debouncedSearchTerm]);
 
   return (
     <main>
