@@ -1,4 +1,6 @@
 import { Client, Databases, ID, Query } from "appwrite";
+import { useEffect, useState } from "react";
+import { useDebounce } from "react-use";
 
 const PROJECT_ID = import.meta.env.VITE_APPWRITE_PROJECT_ID;
 const DATABASE_ID = import.meta.env.VITE_APPWRITE_DATABASE_ID;
@@ -37,9 +39,10 @@ export const updateSearchCount = async (searchTerm, movie) => {
 export const getTrendingMovies = async () => {
   try {
     const result = await database.listDocuments(DATABASE_ID, COLLECTION_ID, [Query.limit(5), Query.orderDesc("count")]);
-
+    console.log("Response dari Appwrite:", result); // Debugging
     return result.documents;
   } catch (error) {
-    console.error(error);
+    console.error("Appwrite Error:", error);
+    throw error;
   }
 };
